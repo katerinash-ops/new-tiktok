@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>TikTok UI Black Russian Fixed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif;
+            color: #ffffff;
+            letter-spacing: -0.6px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .header-area { opacity: 0.25; }
+
+        .options-panel {
+            background-color: #000000;
+            border-top: 0.5px solid #1c1c1e;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 42px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #313134;
+            transition: .2s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: "";
+            height: 20px; width: 20px;
+            left: 2px; bottom: 2px;
+            background-color: white;
+            transition: .2s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #58d3ff; }
+        input:checked + .slider:before { transform: translateX(18px); }
+
+        /* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: Блок баланса всегда занимает место, но скрыт */
+        .balance-container {
+            min-height: 18px; /* Резервируем высоту строки */
+            margin-top: 2px;
+        }
+        #balance-row {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+        #balance-row.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .text-dim { color: #86878b; }
+        .text-blue-tt { color: #58d3ff; }
+        .tight-lh { line-height: 1.15; }
+
+        .tt-icon {
+            width: 22px;
+            height: 22px;
+            transform: scaleX(0.9);
+            stroke-width: 2.5;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="flex justify-center min-h-screen">
+
+<div class="w-full max-w-[420px] bg-black min-h-screen flex flex-col relative">
+    
+    <div class="header-area px-4 pt-4">
+        <div class="flex justify-between items-center mb-6">
+            <button class="text-3xl text-zinc-400">
+                <svg class="w-6 h-6 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+            <span class="text-[17px] font-bold text-zinc-400">Правка</span>
+        </div>
+
+        <div class="flex gap-4 mb-6">
+            <div class="relative w-28 h-28 bg-[#161719] rounded-xl overflow-hidden border border-zinc-800 text-center">
+                <div class="w-full h-full bg-zinc-900 flex flex-col justify-center items-center p-2">
+                   <p class="text-[8px] font-black leading-tight opacity-90 uppercase">ТОЛЬКО ЧТО УЗНАЛ, ЧТО МОЖНО ЗАРАБАТЫВАТЬ НА ПРОСМОТРАХ ТИКТОК</p>
+                </div>
+                <div class="absolute top-2 left-2 bg-black/40 px-1.5 py-0.5 rounded text-[10px] font-bold">Обложка</div>
+            </div>
+            <div class="w-28 h-28 bg-[#1c1c1e] rounded-xl flex items-center justify-center">
+                <span class="text-4xl text-[#3a3a3c] font-light">+</span>
+            </div>
+        </div>
+        
+        <p class="text-zinc-500 text-[15px] font-bold">Добавить броский заголовок</p>
+        <p class="text-zinc-700 text-[12px] mt-4 font-bold leading-tight">Подробное описание поможет получить в 3 раза больше просмотров.</p>
+    </div>
+
+    <div class="options-panel px-4 pt-6 flex-grow mt-2">
+        <div class="flex items-center justify-center relative mb-8">
+            <h2 class="text-[17px] font-bold tracking-tight">Дополнительные параметры</h2>
+            <span class="absolute right-0 text-xl text-zinc-400">✕</span>
+        </div>
+
+        <div class="space-y-7">
+            
+            <div class="flex items-start gap-4">
+                <svg class="tt-icon mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z M8 9h8 M8 12h8 M8 15h4"/></svg>
+                <div class="flex-1 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-[16px] font-medium leading-none">Добавить замещающий текст</h3>
+                        <p class="text-[13px] text-dim mt-1 tight-lh font-bold">Краткое описание изображения для пользователей с нарушениями зрения.</p>
+                    </div>
+                    <svg class="w-4 h-4 text-zinc-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <svg class="tt-icon mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l-8 16h16L12 2z M12 18v-4"/></svg>
+                <div class="flex-1 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-[16px] font-medium leading-none">Контент, созданный ИИ</h3>
+                        <p class="text-[13px] text-dim mt-1 tight-lh font-bold pr-6">Используйте эту метку, если контент был создан или изменен ИИ. <span class="text-white font-black underline">Подробнее</span></p>
+                    </div>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="tt-icon flex justify-center items-center text-xl font-black">$</div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <h3 class="text-[16px] font-medium leading-none">Смотри TikTok и зарабатывай</h3>
+                            <p class="text-[13px] text-dim mt-1 tight-lh font-bold">Включите эту функцию, чтобы получать оплату за просмотры</p>
+                            <div class="balance-container">
+                                <div id="balance-row" class="text-[12px] font-black whitespace-nowrap">
+                                    <span class="text-blue-tt">Баланс: $2,482.91</span>
+                                    <span class="text-blue-tt ml-2">Просмотрено: 1,420</span>
+                                    <span class="text-white ml-1.5 underline">Подробнее</span>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="earn-trigger" onclick="toggleEarn()"><span class="slider"></span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <svg class="tt-icon mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 4v12m0 0l-4-4m4 4l4-4"/></svg>
+                <div class="flex-1 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-[16px] font-medium leading-none">Сохранить на устройство</h3>
+                        <p class="text-[13px] text-dim mt-1 tight-lh font-bold pr-6">Видео будет сохранено на ваше устройство при публикации.</p>
+                    </div>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 pb-10">
+                <div class="tt-icon flex justify-center items-center border-[2.5px] border-zinc-300 rounded-md font-black text-[10px]">d</div>
+                <div class="flex-1 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-[16px] font-medium leading-none">Сохранить с водяным знаком</h3>
+                        <p class="text-[13px] text-dim mt-1 tight-lh font-bold pr-8">Относится только к видео и фото, опубликованным вами.</p>
+                    </div>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleEarn() {
+        const trigger = document.getElementById('earn-trigger');
+        const row = document.getElementById('balance-row');
+        if (trigger.checked) {
+            row.classList.add('visible');
+        } else {
+            row.classList.remove('visible');
+        }
+    }
+</script>
+
+</body>
+</html>
